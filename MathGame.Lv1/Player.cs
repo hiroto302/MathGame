@@ -6,7 +6,16 @@ namespace MathGame.Lv1
   class Player
   {
     // 保持するカード 保持するカードはゲームマスターにより生成される
+    // static にすることで引数にクラスのインスタンス変数を受け取らずにメソッドを作成できる　が　今回は勉強のためstaticなし
     public List<int> card;
+    // プレイヤ-の名前
+    private string name = "hiroto";
+    public string Name
+    {
+      set{name = value;}
+      get{return name ;}
+    }
+
 
     // 保持するカードの表示
     public virtual void ShowCard(Player player)
@@ -28,11 +37,13 @@ namespace MathGame.Lv1
       int n = int.Parse(Console.ReadLine());
       card.Remove(n);
       GameMaster.fieldCard.Add(n);
+      Console.Write("フィールドが保持している数 : ");
       foreach(int i in GameMaster.fieldCard)
       {
-        Console.Write("フィールドが保持している数");
-        Console.WriteLine(i);
+        Console.Write(i + " ");
       }
+      Console.WriteLine();
+      GameMaster.nextPlay = "cp";
     }
   }
 }

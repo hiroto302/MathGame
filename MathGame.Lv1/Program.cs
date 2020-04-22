@@ -13,7 +13,6 @@ namespace MathGame.Lv1
             // Player変数　playする人とコンピューター
             Player player1 = new Player();
             CP cp = new CP();
-
             // カードの生成
             master.MakeCard();
             // 生成したカードの配布

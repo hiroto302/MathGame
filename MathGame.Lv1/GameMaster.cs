@@ -15,6 +15,11 @@ namespace MathGame.Lv1
     public static List<int> fieldCard = new List<int>();
     // フィールドに現在置かれている数
     public static int fieldNum = 0;
+    // case3に置いて、次の処理判の断を行う文字列の変数
+    // public static List<string> nextPlay
+    //   = new List<string>()
+    //       {"player", "cp", "skip","finish"};
+    public static string nextPlay = "";
     // nまでの数字を作成するメソッド
     public void MakeCard()
     {
@@ -81,9 +86,15 @@ namespace MathGame.Lv1
       Console.WriteLine("-------------------------");
     }
 
+    // 誰のターンか表示
+    public void TurnName(Player player)
+    {
+      Console.WriteLine("{0}のターン", player.Name);
+    }
+
 
     // ゲームを実行するメソッド
-    public void PlayGame(Player player1, Player cp)
+    public void PlayGame(Player player1, CP cp)
     {
       int turn = 0;
       while(true)
@@ -100,24 +111,44 @@ namespace MathGame.Lv1
             break;
           // Playerがカードを出す場面
           case 1:
+            TurnName(player1);
             player1.DiscardCard(player1.card);
             turn = 3;
             Line();
             break;
           // CPがカードを出す場面
           case 2:
-
-            turn = 4;
+            cp.ThinkingTime(3);
+            cp.DiscardCard(cp.card);
+            turn = 3;
             break;
-          // フィールドと手札の更新
+          // フィールドと手札の更新 と　その後の処理
           case 3:
             cp.ShowCard(cp);
             FieldCard(turn);
             player1.ShowCard(player1);
-            if(turn == 1)
+            // 条件分岐でどのplayerがプレーするか判断
+            if(nextPlay.Equals("player"))
+            {
+              turn = 1;
+            }
+            else if(nextPlay.Equals("cp"))
             {
               turn = 2;
             }
+            else if(nextPlay.Equals("playerSkip"))
+            {
+              turn = 1;
+            }
+            else if(nextPlay.Equals("cpSkip"))
+            {
+              turn = 2;
+            }
+            else if(nextPlay.Equals("cpSkip"))
+            {
+              turn = 2;
+            }
+
             Line();
             break;
         }
