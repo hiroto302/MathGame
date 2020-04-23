@@ -13,12 +13,9 @@ namespace MathGame.Lv1
     int n = 6;
     // フィールド(中央)に配置されていくカード
     public static List<int> fieldCard = new List<int>();
-    // フィールドに現在置かれている数
+    // フィールドの一番上に現在置かれている数
     public static int fieldNum = 0;
     // case3に置いて、次の処理判の断を行う文字列の変数
-    // public static List<string> nextPlay
-    //   = new List<string>()
-    //       {"player", "cp", "skip","finish"};
     public static string nextPlay = "";
     // nまでの数字を作成するメソッド
     public void MakeCard()
@@ -91,13 +88,41 @@ namespace MathGame.Lv1
     {
       Console.WriteLine("{0}のターン", player.Name);
     }
+    // ゲームの終了
+    void FinishGame()
+    {
+      Console.WriteLine("ゲーム終了");
+      playGame = false;
+    }
 
+    // ゲーム結果の表示
+    void GameResult(Player player1, CP cp)
+    {
+      Console.WriteLine("-------- 結果 --------");
+      player1.Point = player1.card.Count;
+      cp.Point = cp.card.Count;
+      if(player1.Point < cp.Point)
+      {
+        Console.WriteLine("{0}の勝ち!!!", player1.Name);
+      }
+      else if(player1.Point > cp.Point)
+      {
+        Console.WriteLine("CPの勝ち!!!");
+      }
+      else if(player1.Point == cp.Point)
+      {
+        Console.WriteLine("引き分け....");
+      }
+      Console.WriteLine("{0}の失点 : {1}", player1.Name, player1.Point);
+      Console.WriteLine("CPの失点 : {0}", cp.Point);
+    }
 
     // ゲームを実行するメソッド
+    public static int turn = 0;
+    public bool playGame = true;
     public void PlayGame(Player player1, CP cp)
     {
-      int turn = 0;
-      while(true)
+      while(playGame)
       {
         switch(turn)
         {
@@ -121,12 +146,21 @@ namespace MathGame.Lv1
             cp.ThinkingTime(3);
             cp.DiscardCard(cp.card);
             turn = 3;
+            Line();
             break;
           // フィールドと手札の更新 と　その後の処理
           case 3:
             cp.ShowCard(cp);
             FieldCard(turn);
             player1.ShowCard(player1);
+            // ゲーム終了判定
+            // どちらかの手札が0枚になった時点でゲーム終了
+            // 両方とも出すことが出来ない状態の時
+            if(player1.card.Count == 0 || cp.card.Count == 0 ||
+                player1.skipNum == 0 || cp.skipNum == 0)
+            {
+              nextPlay = "finish";
+            }
             // 条件分岐でどのplayerがプレーするか判断
             if(nextPlay.Equals("player"))
             {
@@ -136,27 +170,27 @@ namespace MathGame.Lv1
             {
               turn = 2;
             }
-            else if(nextPlay.Equals("playerSkip"))
+            else if(nextPlay.Equals("playerSkip")) // プレイヤーがskipを利用した時の処理
+            {
+              turn = 2;
+            }
+            else if(nextPlay.Equals("cpSkip"))     // CPがskipを利用した時
             {
               turn = 1;
             }
-            else if(nextPlay.Equals("cpSkip"))
+            else if(nextPlay.Equals("finish"))
             {
-              turn = 2;
+              turn = 4;
             }
-            else if(nextPlay.Equals("cpSkip"))
-            {
-              turn = 2;
-            }
-
             Line();
             break;
-        }
-        if(turn == 4)
-        {
-          break;
+          case 4:
+            // playGame = false;
+            FinishGame();
+            break;
         }
       }
+      GameResult(player1, cp);
     }
   }
 }

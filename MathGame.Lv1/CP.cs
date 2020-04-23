@@ -41,30 +41,58 @@ namespace MathGame.Lv1
     // CPが保持しているカードを出すメソッド // 引数に参照したいListを追加
     public override void DiscardCard(List<int> cpCard)
     {
-      // センターの場に出すカード選択
+      // 場に出すカード選択
       Random random = new Random();
       int n = 0;
       int num = 0;
-      while(true)
+      bool discard = false;
+      // 場に出す以上の数が手札にあるか
+      int m = 0;
+      while(m < card.Count)
       {
-        if(card.Count > 0)
+        if(card[m] > GameMaster.fieldNum)
         {
-          n = random.Next(card.Count - 1);
-          Console.WriteLine("ランダムで生成された数" + n);
+          Console.WriteLine("{0} > {1}", card[m], GameMaster.fieldNum);
+          discard = true;
+          break;
+        }
+        else if(card[m] < GameMaster.fieldNum)
+        {
+          m++;
+        }
+      }
+      // 場に出せる数がある時
+      if(discard == true)
+      {
+        while(true)
+        {
+          n = random.Next(card.Count);
           num = card.Find(i => i == card[n]);
           Console.WriteLine("cpが選択した数" + num);
+          // radomに選択した数が場の数以上のカードを選択した時
+          if(num > GameMaster.fieldNum)
+          {
+            card.Remove(num);
+            GameMaster.fieldCard.Add(num);
+            GameMaster.nextPlay = "player";
+            break;
+          }
         }
-        break;
       }
-      card.Remove(num);
-      GameMaster.fieldCard.Add(num);
+      // 場に出せる数が無い時
+      else if(discard == false)
+      {
+        Console.WriteLine("相手はスキップした");
+        GameMaster.nextPlay = "cpSkip";
+        skipNum --;
+      }
+
       Console.Write("フィールドが保持している数 : ");
       foreach(int i in GameMaster.fieldCard)
       {
         Console.Write(i + " ,");
       }
       Console.WriteLine();
-      GameMaster.nextPlay = "player";
     }
   }
 }
