@@ -10,7 +10,7 @@ namespace MathGame.Lv1
     // 生成する数字カードを格納
     public static List<int> number;
     // 作成する枚数 今回は6までの数
-    int n = 6;
+    int n ;
     // フィールド(中央)に配置されていくカード
     public static List<int> fieldCard = new List<int>();
     // フィールドの一番上に現在置かれている数
@@ -18,8 +18,9 @@ namespace MathGame.Lv1
     // case3に置いて、次の処理判の断を行う文字列の変数
     public static string nextPlay = "";
     // nまでの数字を作成するメソッド
-    public void MakeCard()
+    public void MakeCard(int n)
     {
+      this.n = n;
       number = new List<int>();
       for(int i = 0; i < n; i++)
       {

@@ -14,7 +14,7 @@ namespace MathGame.Lv1
             Player player1 = new Player();
             CP cp = new CP();
             // カードの生成
-            master.MakeCard();
+            master.MakeCard(10);
             // 生成したカードの配布
             master.DistributeCard(player1, cp);
             // ゲームの実行
