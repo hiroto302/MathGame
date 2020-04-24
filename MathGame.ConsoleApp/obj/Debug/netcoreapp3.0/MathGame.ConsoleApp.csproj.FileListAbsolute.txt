@@ -1,0 +1,11 @@
+/Users/hiro302/C#/MathGame/MathGame.ConsoleApp/bin/Debug/netcoreapp3.0/MathGame.ConsoleApp
+/Users/hiro302/C#/MathGame/MathGame.ConsoleApp/bin/Debug/netcoreapp3.0/MathGame.ConsoleApp.deps.json
+/Users/hiro302/C#/MathGame/MathGame.ConsoleApp/bin/Debug/netcoreapp3.0/MathGame.ConsoleApp.runtimeconfig.json
+/Users/hiro302/C#/MathGame/MathGame.ConsoleApp/bin/Debug/netcoreapp3.0/MathGame.ConsoleApp.runtimeconfig.dev.json
+/Users/hiro302/C#/MathGame/MathGame.ConsoleApp/bin/Debug/netcoreapp3.0/MathGame.ConsoleApp.dll
+/Users/hiro302/C#/MathGame/MathGame.ConsoleApp/bin/Debug/netcoreapp3.0/MathGame.ConsoleApp.pdb
+/Users/hiro302/C#/MathGame/MathGame.ConsoleApp/obj/Debug/netcoreapp3.0/MathGame.ConsoleApp.csprojAssemblyReference.cache
+/Users/hiro302/C#/MathGame/MathGame.ConsoleApp/obj/Debug/netcoreapp3.0/MathGame.ConsoleApp.AssemblyInfoInputs.cache
+/Users/hiro302/C#/MathGame/MathGame.ConsoleApp/obj/Debug/netcoreapp3.0/MathGame.ConsoleApp.AssemblyInfo.cs
+/Users/hiro302/C#/MathGame/MathGame.ConsoleApp/obj/Debug/netcoreapp3.0/MathGame.ConsoleApp.dll
+/Users/hiro302/C#/MathGame/MathGame.ConsoleApp/obj/Debug/netcoreapp3.0/MathGame.ConsoleApp.pdb
