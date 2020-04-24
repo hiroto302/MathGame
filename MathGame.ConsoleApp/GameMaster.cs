@@ -9,7 +9,7 @@ namespace MathGame.ConsoleApp
   {
     // 生成する数字カードを格納
     public static List<int> number;
-    // 作成する枚数 今回は6までの数
+    // 作成する枚数
     int n ;
     // フィールド(中央)に配置されていくカード
     public static List<int> fieldCard = new List<int>();

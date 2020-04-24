@@ -11,7 +11,7 @@ namespace MathGame.ConsoleApp
     // プレイヤ-の名前
     private string name = "Player";
     // スキップできる回数
-      public int skipNum = 2;
+    public int skipNum = 2;
 
     // 勝敗を分ける失点ポイント
     private int point = 0;
