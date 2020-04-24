@@ -65,7 +65,7 @@ namespace MathGame.Lv1
     // フィールド 中央のカード置き場所
     static void FieldCard(int n)
     {
-      if(n > 0)
+      if(n > 0 && fieldCard.Count > 0)
       {
         // 現在フィールドにある数の表示
         int topNum = fieldCard.Count;

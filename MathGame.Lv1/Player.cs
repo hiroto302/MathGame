@@ -75,12 +75,15 @@ namespace MathGame.Lv1
         GameMaster.nextPlay = "playerSkip";
         skipNum --;
       }
-      Console.Write("フィールドが保持している数 : ");
-      foreach(int i in GameMaster.fieldCard)
+      if(GameMaster.fieldCard.Count > 0)
       {
-        Console.Write(i + " ");
+        Console.Write("フィールドが保持している数 : ");
+        foreach(int i in GameMaster.fieldCard)
+        {
+          Console.Write(i + " ");
+        }
+        Console.WriteLine();
       }
-      Console.WriteLine();
     }
   }
 }
