@@ -63,7 +63,7 @@ namespace MathGame.Lv1
     }
 
     // フィールド 中央のカード置き場所
-    static void FieldCard(int n)
+    public static void FieldCard(int n)
     {
       if(n > 0 && fieldCard.Count > 0)
       {
