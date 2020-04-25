@@ -78,6 +78,17 @@ namespace MathGame.ConsoleApp
       }
     }
 
+    // 現在のフィールドが保持しているカードの表示
+    public static void CountFieldCard()
+    {
+      Console.Write("フィールドが保持している数 : ");
+      foreach(int i in fieldCard)
+      {
+        Console.Write(i + " ,");
+      }
+      Console.WriteLine();
+    }
+
     // 線
     public static void Line()
     {
@@ -129,31 +140,34 @@ namespace MathGame.ConsoleApp
         {
           // ゲーム開始場面
           case 0:
-            cp.ShowCard(cp);
+            cp.ShowCard();
             FieldCard(turn);
-            player1.ShowCard(player1);
+            player1.ShowCard();
             turn = 1;
             Line();
             break;
           // Playerがカードを出す場面
           case 1:
             TurnName(player1);
-            player1.DiscardCard(player1.card);
+            player1.DiscardCard();
             turn = 3;
-            Line();
             break;
           // CPがカードを出す場面
           case 2:
-            cp.ThinkingTime(3);
-            cp.DiscardCard(cp.card);
+            cp.ThinkingTime(2);
+            cp.DiscardCard();
             turn = 3;
-            Line();
             break;
           // フィールドと手札の更新 と　その後の処理
           case 3:
-            cp.ShowCard(cp);
+            if(fieldCard.Count > 0)
+            {
+              CountFieldCard();
+            }
+            Line();
+            cp.ShowCard();
             FieldCard(turn);
-            player1.ShowCard(player1);
+            player1.ShowCard();
             // ゲーム終了判定
             // どちらかの手札が0枚になった時点でゲーム終了
             // 両方とも出すことが出来ない状態の時

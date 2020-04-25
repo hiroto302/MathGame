@@ -8,8 +8,8 @@ namespace MathGame.ConsoleApp
     // 保持するカード 保持するカードはゲームマスターにより生成される
     // static にすることで引数にクラスのインスタンス変数を受け取らずにメソッドを作成できる　が　今回は勉強のためstaticなし
     public List<int> card;
-    // プレイヤ-の名前
-    private string name = "Player";
+    // プレイヤ-の名前 Playerクラスを継承するクラスでも共通の値
+    private string name = "";
     // スキップできる回数
     public int skipNum = 2;
 
@@ -18,7 +18,13 @@ namespace MathGame.ConsoleApp
     // 各プロパティ
     public string Name
     {
-      set{name = value;}
+      set{
+          name = value;
+          if(name == "")
+          {
+            name = "Player";
+          }
+        }
       get{return name ;}
     }
     // プロパティを静的(static)にしたい場合、pointもstaticである必要がある
@@ -28,12 +34,18 @@ namespace MathGame.ConsoleApp
       get{return point;}
     }
 
+    // コンストラクタ
+    public Player(string name)
+    {
+      this.Name = name;
+    }
 
     // 保持するカードの表示
-    public virtual void ShowCard(Player player)
+    public virtual void ShowCard()
     {
-      Console.WriteLine("playerのカード");
-      foreach(int c in player.card)
+      Console.WriteLine("{0}のカード", Name);
+      // foreach(int c in player.card)
+      foreach(int c in card)
       {
         Console.Write(c + " ");
       }
@@ -43,7 +55,8 @@ namespace MathGame.ConsoleApp
     // 保持しているカードを出すメソッド
     // 場に出ている以上のカードのみ出せるようにし、出せない場合skipする機能の追加 skipは一度のみ
     // 出したカードを手持ちから削除し、場に表示する
-    public virtual void DiscardCard(List<int> playerCard)
+    // public virtual void DiscardCard(List<int> playerCard)
+    public virtual void DiscardCard()
     {
       int n;
       // センターの場に出すカード選択
@@ -74,15 +87,6 @@ namespace MathGame.ConsoleApp
       {
         GameMaster.nextPlay = "playerSkip";
         skipNum --;
-      }
-      if(GameMaster.fieldCard.Count > 0)
-      {
-        Console.Write("フィールドが保持している数 : ");
-        foreach(int i in GameMaster.fieldCard)
-        {
-          Console.Write(i + " ");
-        }
-        Console.WriteLine();
       }
     }
   }

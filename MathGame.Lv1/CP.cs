@@ -5,7 +5,6 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-
 // Playerクラスを継承したコンピュータクラス
 namespace MathGame.Lv1
 {

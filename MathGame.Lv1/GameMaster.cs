@@ -121,7 +121,7 @@ namespace MathGame.Lv1
     // ゲームを実行するメソッド
     public static int turn = 0;
     public bool playGame = true;
-    public void PlayGame(Player player1, CP cp)
+    public virtual void PlayGame(Player player1, CP cp)
     {
       while(playGame)
       {

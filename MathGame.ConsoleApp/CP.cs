@@ -11,12 +11,17 @@ namespace MathGame.ConsoleApp
 {
   class CP : Player
   {
+    public CP() : base("相手")
+    {
+      // コンストラクタ CPのnameを、相手とする
+    }
     Stopwatch stopWatch = new Stopwatch();
     // 保持するカードの表示
-    public override void ShowCard(Player cp)
+    // public override void ShowCard(Player cp)
+    public override void ShowCard()
     {
-      Console.WriteLine("相手のカード");
-      for(int i = 0; i < cp.card.Count; i++)
+      Console.WriteLine("{0}のカード", Name);
+      for(int i = 0; i < card.Count; i++)
       {
         Console.Write("?" + " ");
       }
@@ -27,7 +32,7 @@ namespace MathGame.ConsoleApp
     {
       // 思考時間 ３秒 (３秒間sleepにするか時間を計測する方法)
       // Thread.Sleep(3000);
-      Console.WriteLine("思考中....");
+      Console.WriteLine("{0}が思考中....", Name);
       stopWatch.Start();
       TimeSpan ts = stopWatch.Elapsed;
       while(ts.Seconds < second)
@@ -39,7 +44,8 @@ namespace MathGame.ConsoleApp
     }
 
     // CPが保持しているカードを出すメソッド // 引数に参照したいListを追加
-    public override void DiscardCard(List<int> cpCard)
+    // public override void DiscardCard(List<int> cpCard)
+    public override void DiscardCard()
     {
       // 場に出すカード選択
       Random random = new Random();
@@ -52,7 +58,7 @@ namespace MathGame.ConsoleApp
       {
         if(card[m] > GameMaster.fieldNum)
         {
-          Console.WriteLine("{0} > {1}", card[m], GameMaster.fieldNum);
+          // Console.WriteLine("{0} > {1}", card[m], GameMaster.fieldNum);
           discard = true;
           break;
         }
@@ -68,10 +74,10 @@ namespace MathGame.ConsoleApp
         {
           n = random.Next(card.Count);
           num = card.Find(i => i == card[n]);
-          Console.WriteLine("cpが選択した数" + num);
           // radomに選択した数が場の数以上のカードを選択した時
           if(num > GameMaster.fieldNum)
           {
+            Console.WriteLine("{0}が選択した数 : {1}", Name, num);
             card.Remove(num);
             GameMaster.fieldCard.Add(num);
             GameMaster.nextPlay = "player";
@@ -82,17 +88,11 @@ namespace MathGame.ConsoleApp
       // 場に出せる数が無い時
       else if(discard == false)
       {
-        Console.WriteLine("相手はスキップした");
+        Console.WriteLine("{0}はスキップした", Name);
         GameMaster.nextPlay = "cpSkip";
         skipNum --;
       }
-
-      Console.Write("フィールドが保持している数 : ");
-      foreach(int i in GameMaster.fieldCard)
-      {
-        Console.Write(i + " ,");
-      }
-      Console.WriteLine();
+      
     }
   }
 }
