@@ -9,8 +9,11 @@ namespace MathGame.ConsoleApp
     public void PlayGame(Player player2, CP_Lv2 cp2)
     {
       Console.WriteLine("2のゲームじっこう");
+      foreach(int i in number)
+      {
+        Console.Write(i + " ");
+      }
+      Console.WriteLine();
     }
-
-    
   }
 }

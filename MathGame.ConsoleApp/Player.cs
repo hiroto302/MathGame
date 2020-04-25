@@ -89,5 +89,16 @@ namespace MathGame.ConsoleApp
         skipNum --;
       }
     }
+
+    // 変数の初期化リセット
+    public void Reset()
+    {
+      skipNum = 2;
+      point = 0;
+      if(card.Count > 0)
+      {
+        card.Clear();
+      }
+    }
   }
 }

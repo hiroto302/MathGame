@@ -92,7 +92,6 @@ namespace MathGame.ConsoleApp
         GameMaster.nextPlay = "cpSkip";
         skipNum --;
       }
-      
     }
   }
 }

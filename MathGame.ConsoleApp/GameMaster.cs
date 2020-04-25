@@ -130,10 +130,12 @@ namespace MathGame.ConsoleApp
     }
 
     // ゲームを実行するメソッド
-    public static int turn = 0;
-    public bool playGame = true;
+    public static int turn;
+    public bool playGame;
     public void PlayGame(Player player1, CP cp)
     {
+      turn = 0;
+      playGame = true;
       while(playGame)
       {
         switch(turn)
@@ -206,6 +208,17 @@ namespace MathGame.ConsoleApp
         }
       }
       GameResult(player1, cp);
+      Reset(player1, cp);
+    }
+
+    // ゲームの状態をリセット 繰り返し遊べる仕様
+    public void Reset(Player player1, CP cp)
+    {
+      fieldNum = 0;
+      number.Clear();
+      fieldCard.Clear();
+      player1.Reset();
+      cp.Reset();
     }
   }
 }
