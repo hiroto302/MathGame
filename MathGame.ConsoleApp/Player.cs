@@ -14,7 +14,7 @@ namespace MathGame.ConsoleApp
     public int skipNum = 2;
 
     // 勝敗を分ける失点ポイント
-    private int point = 0;
+    protected int point = 0;
     // 各プロパティ
     public string Name
     {
@@ -35,9 +35,12 @@ namespace MathGame.ConsoleApp
     }
 
     // コンストラクタ
+    public Player() : this("player")
+    {
+    }
     public Player(string name)
     {
-      this.Name = name;
+      this.name = name;
     }
 
     // 保持するカードの表示

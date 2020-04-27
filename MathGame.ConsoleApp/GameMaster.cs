@@ -3,6 +3,10 @@ using System.Collections.Generic;
 
 // Numberクラス
 // ゲームの進行を管理するクラス
+
+// PlayGameのルール
+// 場に出されている数を出すことが可能
+// 交互に出していき多くの枚数を場に出すことが出来た方が勝ち
 namespace MathGame.ConsoleApp
 {
   class GameMaster
@@ -101,18 +105,18 @@ namespace MathGame.ConsoleApp
       Console.WriteLine("{0}のターン", player.Name);
     }
     // ゲームの終了
-    void FinishGame()
+    public void FinishGame()
     {
       Console.WriteLine("ゲーム終了");
       playGame = false;
     }
 
     // ゲーム結果の表示
-    void GameResult(Player player1, CP cp)
+    public void GameResult(Player player1, CP cp)
     {
       Console.WriteLine("-------- 結果 --------");
-      player1.Point = player1.card.Count;
-      cp.Point = cp.card.Count;
+      player1.Point += player1.card.Count;
+      cp.Point += cp.card.Count;
       if(player1.Point < cp.Point)
       {
         Console.WriteLine("{0}の勝ち!!!", player1.Name);

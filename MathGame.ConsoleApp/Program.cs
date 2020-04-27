@@ -22,11 +22,11 @@ namespace MathGame.ConsoleApp
             string name = "player";
             // Player変数　playする人
             Player player = new Player(name);
+            Player_Lv2 player2 = new Player_Lv2(name);
             // 対戦相手　CPの変数
             CP cp = new CP();
             CP_Lv2 cp2 = new CP_Lv2();
 
-            // カードの生成
             while(true)
             {
                 Console.Write("遊ぶゲームレベルを入力 : ");
@@ -43,6 +43,7 @@ namespace MathGame.ConsoleApp
                 switch(lv)
                 {
                     case 1:
+                        // カードの生成
                         master.MakeCard(10);
                         // 引数のインスタンス変数に生成したカードを配布
                         master.DistributeCard(player, cp);
@@ -50,7 +51,12 @@ namespace MathGame.ConsoleApp
                         master.PlayGame(player, cp);
                         break;
                     case 2:
-                        master2.PlayGame(player, cp2);
+                        // カードの生成
+                        master2.MakeCard(10);
+                        // カードの配布
+                        master2.DistributeCard(player2, cp2);
+                        // Lv2のゲーム実行
+                        master2.PlayGame(player2, cp2);
                         break;
                 }
             }
