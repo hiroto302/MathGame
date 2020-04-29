@@ -14,7 +14,7 @@ namespace MathGame.ConsoleApp
     // 生成する数字カードを格納
     public static List<int> number;
     // 作成する枚数
-    int n ;
+    protected int n ;
     // フィールド(中央)に配置されていくカード
     public static List<int> fieldCard = new List<int>();
     // フィールドの一番上に現在置かれている数
@@ -22,7 +22,7 @@ namespace MathGame.ConsoleApp
     // case3に置いて、次の処理判の断を行う文字列の変数
     public static string nextPlay = "";
     // nまでの数字を作成するメソッド
-    public void MakeCard(int n)
+    public virtual void MakeCard(int n)
     {
       this.n = n;
       number = new List<int>();

@@ -1,24 +1,73 @@
 using System;
+using System.Collections.Generic;
 
-// Lv2ゲームを実行するGameMasterクラス
-// Lv2のゲームルール
-// 1~10(計10枚)の各１枚ずつあるカードを均等(5枚)にランダムに配布する
-// 場に出ている数より大き数を出すことが出来る
-// 出来ない場合、場に保持されている枚数分が失点となる, 場の数は0からリスタートされる
-// どちらかの手札が0枚になった時点でゲーム終了
 namespace MathGame.ConsoleApp
 {
-  class GameMaster_Lv2 : GameMaster
+  // Lv３のゲームを実行するクラス
+  // 1~10のカードを2枚ずつ作成
+  // 6枚ずつ配布する
+  // 同じ数は同時に出すことが出来るようにする
+  class GameMaster_Lv3 : GameMaster_Lv2
   {
-
-    // fieldの状態をリセットするメソッド
-    protected void FieldReset()
+    // 1~10のカードを各2枚ずつ生成 合計20枚
+    public override void MakeCard(int n)
     {
-      fieldCard.Clear();
-      fieldNum = 0;
+      this.n = n;
+      number = new List<int>();
+      for(int i = 0; i < 2; i++)
+      {
+        for(int j = 0; j < n; j++)
+        {
+          number.Add(j + 1);
+        }
+      }
     }
-    // Lv2のゲームを実行するメソッド
-    public void PlayGame(Player_Lv2 player, CP_Lv2 cp)
+    //20枚のカードを6枚ずつ配布
+    public void DistributeCard(Player_Lv3 player, CP_Lv3 cp, int m)
+    {
+      Random random = new Random();
+      // 保持するカード
+      player.card = new List<int>();
+      cp.card = new List<int>();
+      // Player一人あたり持つ手札の数 6枚
+      int cardNum = m;
+      // playerへの配布
+      while(true)
+      {
+        int r = random.Next(n * 2); // 0~19の数をランダムに r に代入
+        // 配布カード重複防止
+        if(number[r] != 0)
+        {
+          player.card.Add(number[r]);
+          number[r] = 0;
+          cardNum --;
+          if(cardNum == 0 )
+          {
+            cardNum = m; //cpでも利用するので初期化 リセット
+            break;
+          }
+        }
+      }
+      // cpへの配布
+      while(true)
+      {
+        int r = random.Next(n * 2); // 0~19の数をランダムに r に代入
+        // 配布カード重複防止
+        if(number[r] != 0)
+        {
+          cp.card.Add(number[r]);
+          number[r] = 0;
+          cardNum --;
+          if(cardNum == 0 )
+          {
+            cardNum = 6; //初期化 リセット
+            break;
+          }
+        }
+      }
+    }
+    // Lv3のゲームを実行するメソッド
+    public void PlayGame(Player_Lv3 player, CP_Lv3 cp)
     {
       turn = 0;
       playGame = true;
