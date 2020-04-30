@@ -91,7 +91,7 @@ namespace MathGame.ConsoleApp
             break;
           // CPがカードを出す場面
           case 2:
-            cp.ThinkingTime(2);
+            cp.ThinkingTime(1);
             cp.DiscardCard();
             turn = 3;
             break;

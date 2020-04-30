@@ -50,7 +50,7 @@ namespace MathGame.ConsoleApp
       // foreach(int c in player.card)
       foreach(int c in card)
       {
-        Console.Write(c + " ");
+        Console.Write("|{0}| ", c);
       }
       Console.WriteLine();
     }

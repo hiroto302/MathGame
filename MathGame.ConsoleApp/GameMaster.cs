@@ -74,11 +74,16 @@ namespace MathGame.ConsoleApp
         // 現在フィールドにある数の表示
         int topNum = fieldCard.Count;
         fieldNum = fieldCard[topNum - 1];
-        Console.WriteLine("場の数　{0}", fieldNum);
+        // Console.WriteLine("　　　　___");
+        Console.WriteLine();
+        Console.WriteLine("場の数　|{0}|", fieldNum);
+        Console.WriteLine();
       }
       else
       {
-        Console.WriteLine("場の数　{0}", fieldNum);
+        Console.WriteLine();
+        Console.WriteLine("場の数　|{0}|", fieldNum);
+        Console.WriteLine();
       }
     }
 
