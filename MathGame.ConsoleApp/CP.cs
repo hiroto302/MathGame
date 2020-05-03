@@ -23,8 +23,8 @@ namespace MathGame.ConsoleApp
       Console.WriteLine("{0}のカード", Name);
       for(int i = 0; i < card.Count; i++)
       {
-        // Console.Write("?" + " ");
-        Console.Write("|{0}| ",card[i]);
+        Console.Write("|?|" + " ");
+        // Console.Write("|{0}| ",card[i]);
       }
       Console.WriteLine();
     }

@@ -3,10 +3,10 @@ using System.Collections.Generic;
 
 namespace MathGame.ConsoleApp
 {
-  class CP_Lv3 : CP_Lv2
+  class CP_Lv4 : CP_Lv3
   {
     // CPが保持しているカードを出すメソッド
-    // Player_Lv3と同様の操作をCPが出来るようにする
+    // Player_Lv4と同様の操作をCPが出来るようにする
     public override void DiscardCard()
     {
       // 場に出すカード選択
@@ -49,7 +49,7 @@ namespace MathGame.ConsoleApp
         {
           // Console.WriteLine("{0} > {1}", card[m], GameMaster.fieldNum);
           discard = true;
-          Console.WriteLine("場に出せる数があるよ");
+          // Console.WriteLine("場に出せる数があるよ");
           break;
         }
         else if(card[m] <= GameMaster.fieldNum) // 場の数「以下」ならm++ (8 < 8 のような時,場に出すことが出来ない時無限ループになる)
@@ -65,7 +65,7 @@ namespace MathGame.ConsoleApp
           if(sameNumbers[i] * 2 > GameMaster.fieldNum)
           {
             discard = true;
-            Console.WriteLine("場に、数をを同時に出せば置くことが出来るよ");
+            // Console.WriteLine("場に、数をを同時に出せば置くことが出来るよ");
           }
         }
       }
@@ -80,7 +80,6 @@ namespace MathGame.ConsoleApp
           if(sameNumbers.Contains(num))
           {
             sameNumber = true;
-            Console.WriteLine("sameNumber == trueだよ");
           }
           // sameNumbersの時、1枚のみでも場に出せる時、1枚のみ or 2枚 同時に出すか 判定処理
           if(sameNumber == true && num > GameMaster.fieldNum)
@@ -120,14 +119,16 @@ namespace MathGame.ConsoleApp
       // 場に出せる数が無い時
       else if(discard == false)
       {
-        Console.WriteLine("{0}はスキップした", Name);
-        GameMaster.nextPlay = "cpSkip";
-        skipNum --;
+        // Console.WriteLine("{0}はスキップした", Name);
+        // GameMaster.nextPlay = "cpSkip";
+        // skipNum --;
+        Console.WriteLine("{0}は場に出すことが出来なかった", Name);
+        GameMaster.nextPlay = "cpRestart";
       }
     }
 
     // 場に出すカードの数 手札から出した数(第二引数)を場が保持するカードに加えるメソッド
-    protected virtual void DiscardNum(int n, int num)
+    protected override void DiscardNum(int n, int num)
     {
       switch(n)
       {
@@ -143,6 +144,32 @@ namespace MathGame.ConsoleApp
         card.Remove(num);
         GameMaster.fieldCard.Add(num);
       }
+    }
+
+    public void Draw(List<int> number)
+    {
+      Random random = new Random();
+      // 手札が６枚でない時、かつ、山札にカードが残っている時下記の処理を実行
+      // if(card.Count != 6 && number != null)
+      if(card.Count != 6 && number.Count > 0)
+      {
+        // 手札が6枚になるまで山札から引く
+        while(card.Count < 6)
+        {
+          if(number.Count ==0)
+          {
+            break;
+          }
+          int r = random.Next(number.Count);
+          card.Add(number[r]);
+          number.RemoveAt(r);
+        }
+      }
+    }
+    public void AddPoint(int n)
+    {
+      point += n;
+      Console.WriteLine("{0}現在の失点 : {1}", Name, point);
     }
   }
 }

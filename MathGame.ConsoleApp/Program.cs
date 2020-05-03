@@ -20,15 +20,18 @@ namespace MathGame.ConsoleApp
             GameMaster master = new GameMaster();
             GameMaster_Lv2 master2 = new GameMaster_Lv2();
             GameMaster_Lv3 master3 = new GameMaster_Lv3();
+            GameMaster_Lv4 master4 = new GameMaster_Lv4();
             string name = "player";
             // Player変数　playする人
             Player player = new Player(name);
             Player_Lv2 player2 = new Player_Lv2(name);
             Player_Lv3 player3 = new Player_Lv3(); // 引数なしコンストラクタの時, Nameに"player"が代入
+            Player_Lv4 player4 = new Player_Lv4();
             // 対戦相手　CPの変数
             CP cp = new CP();
             CP_Lv2 cp2 = new CP_Lv2();
             CP_Lv3 cp3 = new CP_Lv3();
+            CP_Lv4 cp4 = new CP_Lv4();
 
             while(true)
             {
@@ -68,6 +71,11 @@ namespace MathGame.ConsoleApp
                         master3.DistributeCard(player3, cp3, 6);
                         // Lv3のゲーム実行
                         master3.PlayGame(player3, cp3);
+                        break;
+                    case 4:
+                        master4.MakeCard(10);
+                        master4.DistributeCard(player4, cp4, GameMaster.number);
+                        master4.PlayGame(player4, cp4);
                         break;
                 }
             }
